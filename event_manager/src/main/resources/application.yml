@@ -19,3 +19,9 @@ spring:
     timeout: 
       seconds: 120
       
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+ 
