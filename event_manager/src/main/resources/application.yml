@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+debug: true
+
+spring:
+  datasource:
+    hikari:
+      username: sa
+      jdbc-url: jdbc:h2:~/test
+      maximum-pool-size: 5
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: update
+        
+        
+  session:
+    timeout: 
+      seconds: 120
+      
