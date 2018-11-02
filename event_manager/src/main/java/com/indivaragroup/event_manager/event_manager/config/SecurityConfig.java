@@ -1,6 +1,7 @@
 package com.indivaragroup.event_manager.event_manager.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,10 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled=true, proxyTargetClass=true)
+@EnableGlobalMethodSecurity(securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
+    @Value("${security.enable-csrf:false}")
+    private boolean csrfEnabled;
+    
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -27,12 +31,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	
-        http.httpBasic().and()
+        http
           .authorizeRequests()
-          .antMatchers("/actuator/health").permitAll()
+//          .antMatchers("/actuator/health").hasRole("ADMIN")
           .antMatchers("/actuator/**").hasRole("ADMIN")
-          .anyRequest().authenticated();
+          .antMatchers("/login").permitAll()
+          .antMatchers("/index.html").permitAll()
+          .anyRequest().authenticated().
+          and().formLogin().and().httpBasic();
+        
+      if(!csrfEnabled){
+        http.csrf().disable();
+      }          
     }
 
     @Bean

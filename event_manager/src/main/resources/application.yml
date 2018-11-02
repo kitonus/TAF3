@@ -4,7 +4,14 @@ server:
     whitelabel:
       enabled: false
 
-debug: true
+debug: false
+
+logging.file: /var/log/${spring.application.name}.log 
+logging.pattern.file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
+
+logging:
+  level:
+    org.springframework.security: info
 
 spring:
   datasource:
@@ -21,9 +28,25 @@ spring:
   session:
     timeout: 
       seconds: 120
+  application:
+    name: event-manager
+  boot:
+    admin:
+      client:
+        instance:
+          metadata:
+            user.name: admin
+            user.password: password            
+        username: admin
+        password: password
       
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring.boot.admin.client.url: http://localhost:7070

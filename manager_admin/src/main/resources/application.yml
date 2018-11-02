@@ -1,0 +1,15 @@
+server:
+  port: 7070
+
+logging:
+  level:
+    org.springframework.web: debug
+  
+spring:
+  boot:
+    admin:
+      context-path: ''
+      
+  application:
+    name: manager-admin
+    
