@@ -1,4 +1,4 @@
-package com.indivaragroup.event_manager.event_manager;
+package com.indivaragroup.event_manager.event_manager.controller;
 
 import java.util.LinkedList;
 import java.util.List;

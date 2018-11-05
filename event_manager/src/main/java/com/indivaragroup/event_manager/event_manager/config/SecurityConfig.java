@@ -37,8 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
           .antMatchers("/actuator/**").hasRole("ADMIN")
           .antMatchers("/login").permitAll()
           .antMatchers("/index.html").permitAll()
-          .antMatchers("/swagger-ui.html").permitAll()
-          .anyRequest().authenticated().
+          .antMatchers("/**/v2/api-docs").permitAll()
+			.antMatchers("/**/springfox-swagger-ui/**").permitAll()
+			.antMatchers("/**/swagger-resources/**").permitAll()
+			.antMatchers("/**/swagger*").permitAll()
+		  .anyRequest().authenticated().
           and().formLogin().and().httpBasic();
         
       if(!csrfEnabled){
