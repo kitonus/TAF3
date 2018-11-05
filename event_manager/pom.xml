@@ -76,6 +76,7 @@
 		<dependency>
 		    <groupId>com.h2database</groupId>
 		    <artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.hazelcast</groupId>
@@ -99,6 +100,11 @@
 		<dependency>
 		    <groupId>org.jolokia</groupId>
 		    <artifactId>jolokia-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>io.kitonus.cache</groupId>
+		    <artifactId>cache-distributed</artifactId>
+		    <version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

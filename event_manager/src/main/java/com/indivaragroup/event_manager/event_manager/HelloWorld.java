@@ -2,12 +2,15 @@ package com.indivaragroup.event_manager.event_manager;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,5 +65,36 @@ public class HelloWorld {
     		authorities.add(g.getAuthority());
     	}
     	return authorities;
+    }
+    
+    private final ConcurrentHashMap<String, String> localUserTable = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, String> localEventTable = new ConcurrentHashMap<>();
+    
+    @PostMapping("/user/{key}/{value}")
+    @CacheEvict(cacheNames="User", allEntries=true)
+    public String saveUserData(@PathVariable("key") String key, @PathVariable("value") String value) {
+    	localUserTable.put(key, value);
+    	return key;
+    }
+    
+    @PostMapping("/event/{key}/{value}")
+    @CacheEvict(cacheNames="Event", allEntries=true)
+    public String saveEventData(@PathVariable("key") String key, @PathVariable("value") String value) {
+    	localEventTable.put(key, value);
+    	return key;
+    }
+    
+    @GetMapping("/user/{key}")
+    @Cacheable("User")
+    public String getUserData(@PathVariable("key") String key) {
+    	log.info(">>>Getting from USER TABLE");
+    	return localUserTable.get(key);
+    }
+
+    @GetMapping("/event/{key}")
+    @Cacheable("Event")
+    public String getEventData(@PathVariable("key") String key) {
+    	log.info(">>>Getting from EVENT TABLE");
+    	return localEventTable.get(key);
     }
 }
