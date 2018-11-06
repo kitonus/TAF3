@@ -6,9 +6,9 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 
-import io.kitonus.cache.distributed.CacheManagerConfigAdapter;
-import io.kitonus.cache.distributed.CacheNameTree;
-import io.kitonus.cache.distributed.TimeToLiveConfig;
+import com.github.kitonus.cache.distributed.CacheManagerConfigAdapter;
+import com.github.kitonus.cache.distributed.CacheNameTree;
+import com.github.kitonus.cache.distributed.TimeToLiveConfig;
 
 @Configuration
 @EnableCaching(proxyTargetClass=true)
