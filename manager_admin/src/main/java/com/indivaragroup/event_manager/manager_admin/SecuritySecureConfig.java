@@ -70,14 +70,15 @@ public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(adminContextPath + "/assets/**").permitAll() 
         .antMatchers(adminContextPath + "/error/**").permitAll()
         .antMatchers(adminContextPath + "/login").permitAll()
+//        .antMatchers(adminContextPath + "/instances").permitAll()
         .anyRequest().authenticated() 
-        .and()
-        .csrf()
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())  
-            .ignoringAntMatchers(
-                adminContextPath + "/instances",   
-                adminContextPath + "/actuator/**"  
-            );
+        .and().csrf().disable();
+//        .csrf()
+//            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())  
+//            .ignoringAntMatchers(
+//                adminContextPath + "/instances",   
+//                adminContextPath + "/actuator/**"  
+//            );
         // @formatter:on
     }
 

@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,9 +55,13 @@ public class HelloWorld {
     	return String.valueOf(session.getAttribute(key));
     }
     
+    @Autowired
+    private Environment env;
+    
     @GetMapping(path="/whoami")
     public String whoami() {
-    	return SecurityContextHolder.getContext().getAuthentication().getName();
+    	return SecurityContextHolder.getContext().getAuthentication().getName()
+    			+" served by server port: "+env.getProperty("server.port");
     }
 
     @GetMapping(path="/authorities")
