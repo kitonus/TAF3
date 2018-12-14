@@ -15,19 +15,22 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${dbhost:localhost:5432}/events?sslmode=disable
-    username: myuser
-    password: 
+    url: jdbc:postgresql://localhost:5435/events
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    username: events
+    password: password
     hikari:
       connection-test-query: select 1
       maximum-pool-size: 5
 
   jpa:
     show-sql: true
+    database: postgresql
     hibernate: 
-      ddl-auto: none 
-    properties:
-      hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
+      ddl-auto: update 
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
 
   session:
     timeout: 
