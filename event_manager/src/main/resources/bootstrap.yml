@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: event-manager
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        healthCheckInterval: 10s
+        instanceId: ${spring.application.name}:${random.value}
+      config:
+        failFast: true
+        enabled: true
+        format: YAML
+        

@@ -32,27 +32,3 @@ spring:
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
 
-  session:
-    timeout: 
-      seconds: 120
-  boot:
-    admin:
-      client:
-        instance:
-          metadata:
-            user.name: admin
-            user.password: password            
-        username: admin
-        password: password
-        auto-deregistration: true
-      
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: never
-
-spring.boot.admin.client.url: http://localhost:7070
