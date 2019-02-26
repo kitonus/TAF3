@@ -3,6 +3,7 @@ package com.indivaragroup.event_manager.event_manager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,8 @@ public class TrainingController {
 	@Autowired
 	private TrainingParticipantService tpService;
 	
+	
+	@Secured("ROLE_ADMIN")
 	@ApiOperation("Save a paricipant")
 	@PostMapping("/participant")
 	public TrainingParticipant save(@RequestBody

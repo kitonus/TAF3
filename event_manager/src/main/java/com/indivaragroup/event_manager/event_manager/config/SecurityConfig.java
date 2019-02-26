@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/**/swagger-resources/**").permitAll()
 			.antMatchers("/**/swagger*").permitAll()
 		  .anyRequest().authenticated().
-          and().formLogin().successForwardUrl("/training/participant/all").and().httpBasic();
+          and().formLogin().successForwardUrl("/token_info").and().httpBasic();
         
       if(!csrfEnabled){
         http.csrf().disable();
