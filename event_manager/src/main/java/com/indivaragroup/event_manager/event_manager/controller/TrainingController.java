@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.indivaragroup.event_manager.event_manager.entity.TrainingParticipant;
+import com.indivaragroup.event_manager.event_manager.exception.DataNotFoundException;
 import com.indivaragroup.event_manager.event_manager.service.TrainingParticipantService;
 
 import io.swagger.annotations.Api;
@@ -34,6 +36,16 @@ public class TrainingController {
 	@GetMapping("/participant/{name}")
 	public List<TrainingParticipant> getTrainingParticipants(
 			@PathVariable("name") String name){
-		return tpService.findByName(name);
+		List<TrainingParticipant> l = tpService.findByName(name);
+		if (l.isEmpty()) {
+			throw new DataNotFoundException("Training participant not found"); 
+		}
+		return l;
+	}
+	
+	@RequestMapping(value="/participant/all", method= {RequestMethod.GET, RequestMethod.POST})
+	public Iterable<TrainingParticipant> getAll(){
+		throw new UnsupportedOperationException("This is unsuppored!");
+		//return tpService.findAll();
 	}
 }

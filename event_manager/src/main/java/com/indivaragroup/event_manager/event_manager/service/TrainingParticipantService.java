@@ -23,4 +23,8 @@ public class TrainingParticipantService {
 	public List<TrainingParticipant> findByName(String name){
 		return tpRepo.findByNameIgnoreCaseLike("%"+name+"%");
 	}
+	
+	public Iterable<TrainingParticipant> findAll(){
+		return tpRepo.findAll();
+	}
 }
