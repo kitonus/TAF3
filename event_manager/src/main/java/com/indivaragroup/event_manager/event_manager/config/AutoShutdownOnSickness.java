@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class AutoShutdownOnSickness implements InitializingBean, DisposableBean{
 	private final Logger log = LoggerFactory.getLogger(AutoShutdownOnSickness.class);
 
-	@Autowired
+	@Autowired(required=false)
 	private DataSourceHealthIndicator dsHealth;
 	
 	@Autowired
@@ -46,6 +46,9 @@ public class AutoShutdownOnSickness implements InitializingBean, DisposableBean{
 		exec.scheduleWithFixedDelay(()->{
 			if (log.isDebugEnabled()) {
 				log.debug(">>>Checking DataSource health");
+			}
+			if (dsHealth == null) {
+				return;
 			}
 			Status stat = dsHealth.health().getStatus();
 			if (Status.OUT_OF_SERVICE.equals(stat) || Status.DOWN.equals(stat)) {
