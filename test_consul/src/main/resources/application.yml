@@ -1,5 +1,5 @@
 server:
-  port: 8180
+  port: 0
   error:
     whitelabel:
       enabled: false
@@ -31,4 +31,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+      
+test_consul.my_name: kiton
+ 
 
