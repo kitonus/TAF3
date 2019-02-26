@@ -1,5 +1,6 @@
 package com.indivaragroup.event_manager.event_manager.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,7 +16,8 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name="trx_training_participant")
 @ApiModel("Training participant")
-public class TrainingParticipant {
+public class TrainingParticipant implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

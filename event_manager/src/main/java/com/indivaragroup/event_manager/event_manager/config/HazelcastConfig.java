@@ -10,14 +10,16 @@ import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
 import org.springframework.session.web.http.HttpSessionIdResolver;
 
 import com.hazelcast.config.Config;
+import com.hazelcast.config.EvictionPolicy;
 import com.hazelcast.config.MapAttributeConfig;
+import com.hazelcast.config.MapConfig;
 import com.hazelcast.config.MapIndexConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 @EnableHazelcastHttpSession
 @Configuration
-public class HazelcastHttpSessionConfig extends AbstractHttpSessionApplicationInitializer {
+public class HazelcastConfig extends AbstractHttpSessionApplicationInitializer {
 
 	@Bean
 	public HazelcastInstance hazelcastInstance() {
@@ -31,6 +33,15 @@ public class HazelcastHttpSessionConfig extends AbstractHttpSessionApplicationIn
 				.addMapAttributeConfig(attributeConfig)
 				.addMapIndexConfig(new MapIndexConfig(
 						HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
+		
+		//add config for cache
+        MapConfig trainingParticipantCache = new MapConfig();
+        trainingParticipantCache.setTimeToLiveSeconds(20);
+        trainingParticipantCache.setEvictionPolicy(EvictionPolicy.LFU);
+
+        config.getMapConfigs().put("trainingParticipantCache",trainingParticipantCache);
+
+ 		
 
 		return Hazelcast.newHazelcastInstance(config); 
 	}

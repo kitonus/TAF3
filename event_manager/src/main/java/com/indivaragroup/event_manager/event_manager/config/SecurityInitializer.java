@@ -7,6 +7,6 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer {
 
 	public SecurityInitializer() {
-		super(SecurityConfig.class, HazelcastHttpSessionConfig.class);
+		super(SecurityConfig.class, HazelcastConfig.class);
 	}
 }
