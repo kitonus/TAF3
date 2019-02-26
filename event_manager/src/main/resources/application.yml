@@ -2,7 +2,8 @@ server:
   port: 8180
   error:
     whitelabel:
-      enabled: false
+      enabled: true
+    
 
 debug: true
 
@@ -17,8 +18,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5435/events
-    username: events
+    url: jdbc:postgresql://localhost:5435/otong_db
+    username: otong
     password: password
     hikari:
       connection-test-query: select 1

@@ -37,4 +37,5 @@ public class EventController {
 	public EventEntity findOne(@PathVariable("id") UUID id) {
 		return service.getEvent(id);
 	}
+	
 }

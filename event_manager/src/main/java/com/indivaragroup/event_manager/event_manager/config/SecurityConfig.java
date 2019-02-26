@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
           .inMemoryAuthentication()
           .withUser("admin").password("password").roles("ADMIN")
           .and().withUser("user").password("password").roles("USER");
-          
+
     }
  
     @Override
@@ -36,13 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
           .antMatchers("/actuator/health").permitAll()
           .antMatchers("/actuator/**").hasRole("ADMIN")
           .antMatchers("/login").permitAll()
+          .antMatchers("/error/**").permitAll()
           .antMatchers("/index.html").permitAll()
           .antMatchers("/**/v2/api-docs").permitAll()
 			.antMatchers("/**/springfox-swagger-ui/**").permitAll()
 			.antMatchers("/**/swagger-resources/**").permitAll()
 			.antMatchers("/**/swagger*").permitAll()
 		  .anyRequest().authenticated().
-          and().formLogin().and().httpBasic();
+          and().formLogin().successForwardUrl("/hello/whoami").and().httpBasic();
         
       if(!csrfEnabled){
         http.csrf().disable();

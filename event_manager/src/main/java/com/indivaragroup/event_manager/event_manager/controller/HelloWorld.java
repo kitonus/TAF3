@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -58,7 +59,7 @@ public class HelloWorld {
     @Autowired
     private Environment env;
     
-    @GetMapping(path="/whoami")
+    @RequestMapping(path="/whoami", method= {RequestMethod.GET, RequestMethod.POST})
     public String whoami() {
     	return SecurityContextHolder.getContext().getAuthentication().getName()
     			+" served by server port: "+env.getProperty("server.port");
