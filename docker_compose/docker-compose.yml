@@ -1,0 +1,10 @@
+version: '2.2'
+services:
+  event-manager:
+    image: event_manager
+    scale: 3
+  dev-consul:
+    image: consul
+    ports:
+      - "8500:8500"
+ 
