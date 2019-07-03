@@ -8,8 +8,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-@EnableFeignClients
 @EnableTransactionManagement(proxyTargetClass=true)
 public class EventManagerApplication {
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.indivaragroup.event_manager.event_manager.entity.TrainingParticipant;
 
-@FeignClient("event-manager2")
+@FeignClient(name="event-manager2", url="http://localhost:9191")
 @RequestMapping("/training2")
 public interface TrainingClient {
 

@@ -26,13 +26,13 @@ public class TestTrainingClientController {
 	@Autowired
 	private TrainingClient tc;
 	
-	@CacheEvict(cacheNames="trainingParticipantCache", allEntries = true)
+	//@CacheEvict(cacheNames="trainingParticipantCache", allEntries = true)
 	@PostMapping("/save_participant")
 	public TrainingParticipant saveUsingRemote(@RequestBody TrainingParticipant participant) {
 		return tc.save(participant);
 	}
 	
-	@Cacheable(cacheNames="trainingParticipantCache", key="{#name}")
+//	@Cacheable(cacheNames="trainingParticipantCache", key="{#name}")
 	@GetMapping("/get_participants/{name}")
 	public List<TrainingParticipant> getParticipants(@PathVariable("name") String name){
 		logger.info("==========================================>>>>>>>Ambil dari service lain!!!!");

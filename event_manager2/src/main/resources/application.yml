@@ -18,7 +18,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5435/otong_db
+    url: jdbc:postgresql://jps-01368:5432/otong
     username: otong
     password: password
     hikari:
@@ -34,8 +34,7 @@ spring:
       hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
 
   session:
-    timeout: 
-      seconds: 120
+    timeout: 120s
   boot:
     admin:
       client:
